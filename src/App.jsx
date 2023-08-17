@@ -3,6 +3,7 @@ import './index.css'
 import AllPlayers from "./components/AllPlayers"
 import SinglePlayer from "./components/SinglePlayer"
 
+
 function App() {
 
   return (
