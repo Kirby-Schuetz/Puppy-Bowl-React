@@ -1,16 +1,18 @@
-// function fetchAllPlayers
-// add try/catches
 
-const API_URL = "https://fsa-puppy-bowl.herokuapp.com/api/2306-GHP-ET-WEB-FT-SF"
+// const API_URL = "https://fsa-puppy-bowl.herokuapp.com/api/2306-GHP-ET-WEB-FT-SF"
 
-const PLAYERS_API_URL = "https://fsa-puppy-bowl.herokuapp.com/api/2306-GHP-ET-WEB-FT-SF/players"
 
+export async function fetchAllPlayers () {
+
+try {
 // fetch data from the API
-
-const response = fetch("https://fsa-puppy-bowl.herokuapp.com/api/2306-GHP-ET-WEB-FT-SF");
+const response = await fetch("https://fsa-puppy-bowl.herokuapp.com/api/2306-GHP-ET-WEB-FT-SF/players");
 
 // transform into json for use
-const result = response.json();
+const allPlayers = await response.json();
+return allPlayers.data.players
 
-// 
+} catch (error) {
+    console.error("Failed to fetch puppies", error)
+}}
 
