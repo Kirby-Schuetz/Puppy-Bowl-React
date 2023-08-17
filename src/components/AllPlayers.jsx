@@ -1,36 +1,40 @@
-// import { fetchAllPlayers } from "../API"
+import { fetchAllPlayers } from "../API"
 import { useState, useEffect} from "react"
+import SinglePlayer from "./SinglePlayer"
 // import React from "react"
-const PLAYERS_API_URL = "https://fsa-puppy-bowl.herokuapp.com/api/2306-GHP-ET-WEB-FT-SF/players"
+
+
 export default function AllPlayers() {
-    const [players, setPlayers] = useState([])
-    useEffect(() => {
-        async function fetchAllPlayers () {
+    const [players, setPlayers] = useState([]);
+    const [selectedPuppyId, setSelectedPuppyId] = useState(null);
+
+    
+        async function fetchAllPuppies () {
             // fetch data from the API
             try{
-            const response = await fetch(PLAYERS_API_URL);
-            // transform into json for use
-            const players = await response.json();
-            setPlayers(players.data.players)
+            setPlayers(await fetchAllPlayers())
             } catch(err) {
                 console.err("uh oh trouble fetching all players", err)
             }
         }
-        fetchAllPlayers();
-    }, [])
-    return (
-        // will return HTML bc jsx
-        <div>
-        {
-            players.map((player)=>{
-                return (
-                    <div key={player.id}>
-                        <h4>{player.name}</h4>
-                        <img src={player.imageUrl} alt={player.name} />
-                    </div>
-                )
-            })
-        }
-    </div>
-    )
+        useEffect(() => {
+            fetchAllPuppies();
+        }, []);
+        
+        return (
+            <div>
+            {
+                players.map((player)=>{
+                    return (
+                        <div key={player.id}>
+                            <h2>Name: {player.name}</h2>
+                            <h2>Breed: {player.breed}</h2>
+                            <img src={player.imageUrl} alt={player.name} />
+                            <SinglePlayer selectedPuppyId={player.id} setSelectedPuppyId={setSelectedPuppyId}/>
+                        </div>
+                    )
+                })
+            }
+           </div>
+        )
 }

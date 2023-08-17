@@ -1,5 +1,5 @@
 import { Routes, Route, Link } from 'react-router-dom'
-import './index.css'
+import './App.css'
 import AllPlayers from "./components/AllPlayers"
 import SinglePlayer from "./components/SinglePlayer"
 
@@ -19,7 +19,7 @@ function App() {
 <div id="main-section">
   <Routes>
     <Route path="/allplayers" element={<AllPlayers />} />
-    <Route path="/singleplayers" element={<SinglePlayer />} />
+    <Route path="/singleplayer" element={<SinglePlayer />} />
   </Routes>
 </div>
    </div>
